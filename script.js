@@ -4,27 +4,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const startOverlay = document.getElementById('startOverlay');
     let experienceStarted = false;
 
-    // Click-to-start: unmute and begin
-    startOverlay.addEventListener('click', () => {
-        if (!experienceStarted) {
-            experienceStarted = true;
-            bgMusic.muted = false;
-            bgMusic.volume = 0.45;
-            bgMusic.play().catch(e => console.log('Audio play failed:', e));
-            startOverlay.classList.add('hidden');
-        }
-    });
-
-    // Fallback: try autoplay immediately
-    bgMusic.volume = 0.45;
-    bgMusic.play().then(() => {
-        // Autoplay succeeded, hide overlay
-        startOverlay.classList.add('hidden');
+    // Start the entire cinematic experience
+    function startExperience() {
+        if (experienceStarted) return;
         experienceStarted = true;
-    }).catch(() => {
-        // Autoplay blocked, user must click
-        console.log('Autoplay blocked - waiting for user interaction');
-    });
+        
+        bgMusic.muted = false;
+        bgMusic.volume = 0.45;
+        bgMusic.play().catch(e => console.log('Audio play failed:', e));
+        startOverlay.classList.add('hidden');
+
+        // ── Cinematic sequence ────────────────────────────────────
+        // Scene 1: Intro (0ms) — 5.8s view
+        // Scene 2: Raven (5.8s + 650ms transition)
+        //   Raven animation: 3.8s, feather follows at 3s offset
+        //   Total raven scene: 5.5s
+        // Scene 3: Sealed letter (user arrives, auto-shown)
+        // Scene 4: Message (user clicks seal)
+
+        const T_INTRO  = 5800;
+        const T_RAVEN  = T_INTRO + 650 + 5500;   // 11950ms
+
+        // Intro → Raven
+        setTimeout(() => {
+            goTo('scene-raven');
+        }, T_INTRO);
+
+        // Raven → Sealed letter
+        setTimeout(() => {
+            goTo('scene-letter');
+        }, T_RAVEN);
+    }
+
+    // Click-to-start: unmute and begin
+    startOverlay.addEventListener('click', startExperience);
 
     // ── Scene management ──────────────────────────────────────
     function goTo(id) {
@@ -89,27 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(p);
         }
     })();
-
-    // ── Cinematic sequence ────────────────────────────────────
-    // Scene 1: Intro (0ms) — 5.8s view
-    // Scene 2: Raven (5.8s + 650ms transition)
-    //   Raven animation: 3.8s, feather follows at 3s offset
-    //   Total raven scene: 5.5s
-    // Scene 3: Sealed letter (user arrives, auto-shown)
-    // Scene 4: Message (user clicks seal)
-
-    const T_INTRO  = 5800;
-    const T_RAVEN  = T_INTRO + 650 + 5500;   // 11950ms
-
-    // Intro → Raven
-    setTimeout(() => {
-        goTo('scene-raven');
-    }, T_INTRO);
-
-    // Raven → Sealed letter
-    setTimeout(() => {
-        goTo('scene-letter');
-    }, T_RAVEN);
 
     // Sealed letter → Message (user clicks wax seal)
     document.getElementById('sealBtn').addEventListener('click', () => {
