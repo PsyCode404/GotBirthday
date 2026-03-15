@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Scene 3: Sealed letter (user arrives, auto-shown)
         // Scene 4: Message (user clicks seal)
 
-        const T_INTRO  = 5800;
-        const T_RAVEN  = T_INTRO + 650 + 5500;   // 11950ms
+        const T_INTRO  = 4000;
+        const T_RAVEN  = T_INTRO + 650 + 3500;   // 11950ms
 
         // Intro → Raven
         setTimeout(() => {
