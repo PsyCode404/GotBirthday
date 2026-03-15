@@ -3,72 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Magical Birthday Story</title>
+    <title>A Message from the North — Lady Soumaya of House Guenidi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-container"></div>
-    <audio id="backgroundMusic" loop src="magical_music.mp3"></audio>
+    <div class="bg"></div>
+    <div class="castle-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <filter id="wglow" x="-150%" y="-150%" width="400%" height="400%">
+                    <feGaussianBlur stdDeviation="5" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="mist" x="-5%" y="-200%" width="110%" height="600%">
+                    <feGaussianBlur stdDeviation="14"/>
+                </filter>
+                <radialGradient id="moonhalo" gradientUnits="userSpaceOnUse" cx="720" cy="0" r="420">
+                    <stop offset="0%" stop-color="#A3BCCB" stop-opacity="0.16"/>
+                    <stop offset="100%" stop-color="#A3BCCB" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
 
-    <div class="step active" id="step1">
-        <div class="gift-container" id="giftContainer">
-            <div class="gift-box">
-                <div class="gift-lid"></div>
-                <div class="gift-bow"></div>
-            </div>
-            <p class="instruction-text">A surprise is waiting...</p>
+            <!-- Moon halo -->
+            <circle cx="720" cy="80" r="200" fill="url(#moonhalo)"/>
+            <!-- Moon disc -->
+            <circle cx="720" cy="80" r="34" fill="#4F7489" opacity="0.22"/>
+            <circle cx="720" cy="80" r="24" fill="#A3BCCB" opacity="0.16"/>
+
+            <!-- THE WALL — massive distant structure, full width -->
+            <polygon fill="#010810"
+                points="0,520 0,392 0,368 38,368 38,392 64,392 64,368 102,368 102,392 128,392 128,368 166,368 166,392 192,392 192,368 230,368 230,392 256,392 256,368 294,368 294,392 320,392 320,368 358,368 358,392 384,392 384,368 422,368 422,392 448,392 448,368 486,368 486,392 512,392 512,368 550,368 550,392 576,392 576,368 614,368 614,392 640,392 640,368 678,368 678,392 704,392 704,368 742,368 742,392 768,392 768,368 806,368 806,392 832,392 832,368 870,368 870,392 896,392 896,368 934,368 934,392 960,392 960,368 998,368 998,392 1024,392 1024,368 1062,368 1062,392 1088,392 1088,368 1126,368 1126,392 1152,392 1152,368 1190,368 1190,392 1216,392 1216,368 1254,368 1254,392 1280,392 1280,368 1318,368 1318,392 1344,392 1344,368 1382,368 1382,392 1440,392 1440,520"/>
+
+            <!-- Mist at base of The Wall -->
+            <rect x="0" y="496" width="1440" height="38" fill="#0a1e2e" filter="url(#mist)" opacity="0.7"/>
+
+            <!-- CASTLE SILHOUETTE — Winterfell-like fortress -->
+            <polygon fill="#010609"
+                points="0,900 0,590 0,568 20,568 20,590 34,590 34,568 54,568 54,590 68,590 68,568 88,568 88,590 90,590
+                        90,670 90,654 106,654 106,670 120,670 120,654 136,654 136,670 165,670
+                        165,520 165,498 185,498 185,520 200,520 200,498 220,498 220,520 235,520 235,498 255,498 255,520 270,520
+                        270,630 270,614 286,614 286,630 300,630 300,614 316,614 316,630 355,630
+                        355,490 355,468 375,468 375,490 390,490 390,468 410,468 410,490 425,490 425,468 445,468 445,490 465,490
+                        465,610 465,594 481,594 481,610 495,610 495,594 511,594 511,610 535,610
+                        535,400 535,380 551,380 551,400 563,400 563,380 579,380 579,400 590,400
+                        590,240 590,218 614,218 614,240 630,240 630,218 654,218 654,240 670,240 670,218 694,218 694,240 710,240 710,218 734,218 734,240 750,240 750,218 774,218 774,240 790,240
+                        790,400 790,380 806,380 806,400 818,400 818,380 834,380 834,400 845,400
+                        845,610 845,594 861,594 861,610 875,610 875,594 891,594 891,610 915,610
+                        915,490 915,468 935,468 935,490 950,490 950,468 970,468 970,490 985,490 985,468 1005,468 1005,490 1025,490
+                        1025,630 1025,614 1041,614 1041,630 1055,630 1055,614 1071,614 1071,630 1110,630
+                        1110,520 1110,498 1130,498 1130,520 1145,520 1145,498 1165,498 1165,520 1180,520 1180,498 1200,498 1200,520 1215,520
+                        1215,670 1215,654 1231,654 1231,670 1245,670 1245,654 1261,654 1261,670 1290,670
+                        1290,590 1290,568 1310,568 1310,590 1324,590 1324,568 1344,568 1344,590 1358,590 1358,568 1378,568 1378,590 1380,590
+                        1380,720 1440,720 1440,900 0,900"/>
+
+            <!-- Gate arch openings (arched dark cutouts) -->
+            <path d="M475,900 L475,718 Q495,692 515,718 L515,900 Z" fill="#020c16"/>
+            <path d="M865,900 L865,718 Q885,692 905,718 L905,900 Z" fill="#020c16"/>
+
+            <!-- Window glows (blurred warm light behind windows) -->
+            <rect x="600" y="258" width="20" height="28" rx="2" fill="#b06010" opacity="0.85" filter="url(#wglow)"/>
+            <rect x="628" y="290" width="20" height="28" rx="2" fill="#b06010" opacity="0.75" filter="url(#wglow)"/>
+            <rect x="652" y="258" width="20" height="28" rx="2" fill="#b06010" opacity="0.85" filter="url(#wglow)"/>
+            <rect x="676" y="290" width="20" height="28" rx="2" fill="#b06010" opacity="0.75" filter="url(#wglow)"/>
+            <rect x="700" y="258" width="20" height="28" rx="2" fill="#b06010" opacity="0.85" filter="url(#wglow)"/>
+            <rect x="724" y="290" width="20" height="28" rx="2" fill="#b06010" opacity="0.75" filter="url(#wglow)"/>
+            <rect x="748" y="258" width="20" height="28" rx="2" fill="#b06010" opacity="0.8"  filter="url(#wglow)"/>
+            <rect x="374" y="505" width="16" height="22" rx="1" fill="#8a4e0a" opacity="0.7"  filter="url(#wglow)"/>
+            <rect x="406" y="520" width="16" height="22" rx="1" fill="#8a4e0a" opacity="0.65" filter="url(#wglow)"/>
+            <rect x="438" y="504" width="16" height="22" rx="1" fill="#8a4e0a" opacity="0.7"  filter="url(#wglow)"/>
+            <rect x="926" y="505" width="16" height="22" rx="1" fill="#8a4e0a" opacity="0.7"  filter="url(#wglow)"/>
+            <rect x="958" y="520" width="16" height="22" rx="1" fill="#8a4e0a" opacity="0.65" filter="url(#wglow)"/>
+            <rect x="990" y="504" width="16" height="22" rx="1" fill="#8a4e0a" opacity="0.7"  filter="url(#wglow)"/>
+
+            <!-- Windows (crisp amber) -->
+            <rect x="604" y="262" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="632" y="294" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="656" y="262" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="680" y="294" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="704" y="262" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="728" y="294" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="752" y="262" width="12" height="20" rx="2" fill="#c87828"/>
+            <rect x="376" y="508" width="10" height="16" rx="1" fill="#b06416"/>
+            <rect x="408" y="522" width="10" height="16" rx="1" fill="#b06416"/>
+            <rect x="440" y="507" width="10" height="16" rx="1" fill="#b06416"/>
+            <rect x="928" y="508" width="10" height="16" rx="1" fill="#b06416"/>
+            <rect x="960" y="522" width="10" height="16" rx="1" fill="#b06416"/>
+            <rect x="992" y="507" width="10" height="16" rx="1" fill="#b06416"/>
+            <rect x="192" y="547" width="10" height="14" rx="1" fill="#a05c12"/>
+            <rect x="220" y="568" width="10" height="14" rx="1" fill="#a05c12"/>
+            <rect x="1124" y="547" width="10" height="14" rx="1" fill="#a05c12"/>
+            <rect x="1152" y="568" width="10" height="14" rx="1" fill="#a05c12"/>
+            <rect x="34"   y="627" width="10" height="14" rx="1" fill="#8a4e10"/>
+            <rect x="1308" y="627" width="10" height="14" rx="1" fill="#8a4e10"/>
+            <rect x="548"  y="418" width="10" height="14" rx="1" fill="#a06018"/>
+            <rect x="824"  y="418" width="10" height="14" rx="1" fill="#a06018"/>
+        </svg>
+    </div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+    <div id="particles"></div>
+    <audio id="bgMusic" loop src="8d82b5_Game_of_Thrones_Theme_Song.mp3"></audio>
+
+    <!-- Scene 1: Dark Intro -->
+    <div class="scene active" id="scene-intro">
+        <div class="intro-content">
+            <div class="intro-sigil">✦</div>
+            <p class="intro-line" id="line1">A message arrives from the North...</p>
+            <p class="intro-line" id="line2">The realm awaits.</p>
         </div>
     </div>
 
-    <div class="step" id="step2">
-        <div class="key-container" id="keyContainer">
-            <svg id="animatedKey" class="key-svg" viewBox="0 0 100 100">
-                <path d="M60,20 Q50,10 40,20 T20,20 Q10,25 20,30 T40,30 Q50,35 40,40 L40,70 L35,75 L35,80 L40,85 L45,80 L45,75 L40,70" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <!-- Scene 2: Raven flies in, drops letter, feather drifts -->
+    <div class="scene" id="scene-raven">
+        <!-- Improved raven SVG -->
+        <div class="raven-wrap" id="ravenWrap">
+            <svg class="raven-svg" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+                <!-- Body -->
+                <ellipse cx="100" cy="78" rx="26" ry="18" fill="#0c0c0c"/>
+                <!-- Tail feathers -->
+                <path d="M86 92 Q80 115 74 118 Q82 110 88 112 Q84 120 80 124 Q90 112 95 116 Q93 124 92 128 Q98 114 100 118 Q102 128 103 128 Q103 118 108 116 Q112 124 110 128 Q110 116 114 112 Q116 122 122 124 Q116 120 120 118 Q126 110 118 112 Q122 118 114 92 Z" fill="#0c0c0c"/>
+                <!-- Neck -->
+                <ellipse cx="100" cy="56" rx="14" ry="10" fill="#0c0c0c"/>
+                <!-- Head -->
+                <circle cx="100" cy="42" r="16" fill="#111"/>
+                <!-- Beak upper -->
+                <path d="M100 40 Q116 37 120 40 Q114 43 100 44 Z" fill="#b8920e"/>
+                <!-- Beak lower -->
+                <path d="M100 44 Q112 44 118 42 Q112 47 100 46 Z" fill="#9a7a0a"/>
+                <!-- Eye glow -->
+                <circle cx="107" cy="38" r="5" fill="#1a1a1a"/>
+                <circle cx="107" cy="38" r="3" fill="#d4a017"/>
+                <circle cx="108.5" cy="36.5" r="1" fill="#fff8"/>
+                <!-- Left wing upper -->
+                <path class="wing-l" d="M74 65 Q30 42 6 58 Q14 72 40 74 Q55 74 74 72 Z" fill="#0e0e0e"/>
+                <!-- Left wing lower feathers -->
+                <path class="wing-l" d="M74 72 Q44 78 18 74 Q30 84 60 80 Q68 78 74 76 Z" fill="#111" opacity="0.9"/>
+                <!-- Right wing upper -->
+                <path class="wing-r" d="M126 65 Q170 42 194 58 Q186 72 160 74 Q145 74 126 72 Z" fill="#0e0e0e"/>
+                <!-- Right wing lower feathers -->
+                <path class="wing-r" d="M126 72 Q156 78 182 74 Q170 84 140 80 Q132 78 126 76 Z" fill="#111" opacity="0.9"/>
+                <!-- Talons -->
+                <path d="M90 94 Q86 102 82 105 M90 94 Q88 104 86 108 M90 94 Q92 104 92 108 M110 94 Q114 102 118 105 M110 94 Q112 104 114 108 M110 94 Q108 104 108 108" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- Letter in talons -->
+                <rect class="talon-letter" x="82" y="94" width="36" height="26" rx="3" fill="#f0dfa0" stroke="#c8a020" stroke-width="1.8"/>
+                <path d="M82 102 L100 112 L118 102" stroke="#8b0000" stroke-width="1.5" fill="none"/>
+                <line x1="88" y1="108" x2="112" y2="108" stroke="#c8a02066" stroke-width="1"/>
+                <line x1="88" y1="113" x2="112" y2="113" stroke="#c8a02066" stroke-width="1"/>
             </svg>
-            <p class="instruction-text">A key to unlock the magic...</p>
+        </div>
+        <!-- Drifting feather -->
+        <div class="feather-wrap" id="featherWrap">
+            <svg class="feather-svg" viewBox="0 0 20 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2 Q14 15 12 30 Q16 20 18 35 Q14 28 12 40 Q15 32 14 50 Q12 42 10 58 Q8 42 6 50 Q5 32 8 40 Q6 28 2 35 Q4 20 8 30 Q6 15 10 2 Z" fill="#1a1a1a" opacity="0.85"/>
+                <path d="M10 2 Q10 30 10 58" stroke="#2a2a2a" stroke-width="0.8" fill="none"/>
+            </svg>
         </div>
     </div>
 
-    <div class="step" id="step3">
-        <div class="storybook-container" id="storybookContainer">
-            <div class="book">
-                <div class="book-cover" id="bookCover">
-                    <div class="cover-front">
-                        <h2 class="book-title">Your Story</h2>
-                    </div>
-                    <div class="cover-back"></div>
+    <!-- Scene 3: Sealed parchment letter (pure CSS) -->
+    <div class="scene" id="scene-letter">
+        <div class="scroll-wrap">
+            <div class="scroll-rod scroll-rod-top"></div>
+            <div class="parchment-scroll">
+                <div class="parchment-inner">
+                    <div class="parchment-stain s1"></div>
+                    <div class="parchment-stain s2"></div>
+                    <div class="parchment-stain s3"></div>
+                    <div class="scroll-header-text">A Royal Message</div>
+                    <div class="scroll-divider"></div>
+                    <p class="scroll-teaser">For the eyes of Lady Soumaya<br/>of House Guenidi</p>
+                    <button class="seal-btn" id="sealBtn">
+                        <div class="seal-drip"></div>
+                        <span class="seal-symbol">✦</span>
+                        <span class="seal-text">Break the Seal</span>
+                    </button>
                 </div>
-                <div class="page" id="page1">
-                    <div class="page-front">
-                        <p class="page-text">A new chapter begins today...</p>
-                    </div>
-                    <div class="page-back">
-                        <p class="page-text">Filled with promise and new adventures...</p>
-                    </div>
-                </div>
-                <div class="page" id="page2">
-                    <div class="page-front">
-                        <p class="page-text">May it be your best one yet...</p>
-                    </div>
-                    <div class="page-back">
-                        <p class="page-text">Full of laughter, joy, and light...</p>
-                    </div>
-                </div>
-                </div>
-        </div>
-    </div>
-
-    <div class="step" id="step5">
-        <div class="finale-container">
-            <div class="finale-card">
-                <svg class="floral-svg" viewBox="0 0 400 400">
-                    <path id="vine1" d="M10,200 C40,100 150,100 200,200 S360,300 390,200" />
-                    <path id="vine2" d="M10,210 C40,310 150,310 200,210 S360,110 390,210" />
-                </svg>
-                <h1 class="finale-greeting">Happy Birthday</h1>
-                <h2 class="finale-name">Sapthesh!</h2>
-                <p class="finale-wish">Wishing you a day as magical as this story, and a year filled with wonderful new beginnings. May all your dreams blossom.</p>
             </div>
+            <div class="scroll-rod scroll-rod-bottom"></div>
+        </div>
+    </div>
+
+    <!-- Scene 4: Birthday message (revealed parchment) -->
+    <div class="scene" id="scene-message">
+        <div class="scroll-wrap revealed">
+            <div class="scroll-rod scroll-rod-top"></div>
+            <div class="parchment-scroll">
+                <div class="parchment-inner">
+                    <div class="parchment-stain s1"></div>
+                    <div class="parchment-stain s2"></div>
+                    <div class="parchment-stain s3"></div>
+                    <div class="msg-ornament">⚔ &nbsp;✦&nbsp; ⚔</div>
+                    <h1 class="msg-title">Happy Birthday</h1>
+                    <div class="msg-rule"></div>
+                    <h2 class="msg-to">To Lady Soumaya</h2>
+                    <h3 class="msg-house">of House Guenidi</h3>
+                    <div class="msg-rule"></div>
+                    <div class="msg-body">
+                        <p>From the frozen lands beyond the Wall to the sun-kissed shores of Dorne, the realm gathers to celebrate your Birthday.</p>
+                        <p>May your courage be as fierce as the wolves of the North, your wisdom as deep as the halls of Oldtown, and your spirit as strong as Valyrian steel.</p>
+                        <p>Long may you reign in joy and glory.</p>
+                    </div>
+                    <p class="msg-sign">Happy Birthday, Lady Soumaya of House Guenidi.</p>
+                    <div class="msg-ornament">⚔ &nbsp;✦&nbsp; ⚔</div>
+                </div>
+            </div>
+            <div class="scroll-rod scroll-rod-bottom"></div>
         </div>
     </div>
 

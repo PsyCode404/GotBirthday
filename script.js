@@ -1,107 +1,96 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Element Selectors ---
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const giftContainer = document.getElementById('giftContainer');
-    const keyContainer = document.getElementById('keyContainer');
-    const storybookContainer = document.getElementById('storybookContainer');
-    const bookCover = document.getElementById('bookCover');
-    const pages = document.querySelectorAll('.page');
-    
-    const steps = {
-        step1: document.getElementById('step1'),
-        step2: document.getElementById('step2'),
-        step3: document.getElementById('step3'),
-        step5: document.getElementById('step5'),
-    };
 
-    // --- Utility Function to Transition Steps ---
-    function transitionToStep(targetStepId) {
-        const currentActive = document.querySelector('.step.active');
-        if (currentActive) {
-            currentActive.classList.remove('active');
-        }
-        steps[targetStepId].classList.add('active');
-    }
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.45;
 
-    // --- Step 1: Gift Box Interaction ---
-    giftContainer.addEventListener('click', () => {
-        giftContainer.classList.add('open');
-        backgroundMusic.play().catch(e => console.error("Autoplay failed:", e));
-        
-        setTimeout(() => {
-            transitionToStep('step2');
-        }, 800); // Wait for lid animation
-    });
-
-    // --- Step 2: Key Interaction ---
-    keyContainer.addEventListener('click', () => {
-        keyContainer.classList.add('unlocking');
-        
-        setTimeout(() => {
-            transitionToStep('step3');
-            // Animate book into view
-            setTimeout(() => {
-                storybookContainer.classList.add('visible');
-            }, 100);
-        }, 600); // Wait for key animation
-
-        // Start the storybook sequence after a delay
-        setTimeout(startStorybookSequence, 2000);
-    });
-
-    // --- Step 3 & 4: Storybook Sequence ---
-    function startStorybookSequence() {
-        // 1. Center and enlarge the book
-        storybookContainer.classList.add('opening');
-
-        // 2. Open the cover
-        setTimeout(() => {
-            bookCover.classList.add('flipped');
-        }, 1000);
-
-        // 3. Turn pages sequentially
-        pages.forEach((page, index) => {
-            setTimeout(() => {
-                page.classList.add('flipped');
-            }, 2500 + (index * 2000)); // Stagger page turns
+    // ── Scene management ──────────────────────────────────────
+    function goTo(id) {
+        document.querySelectorAll('.scene.active').forEach(s => {
+            s.classList.remove('active');
+            s.classList.add('out');
+            setTimeout(() => s.classList.remove('out'), 1600);
         });
-
-        // 4. Transition to the final step after the last page turns
-        const totalPageTurnTime = 2500 + (pages.length * 2000);
         setTimeout(() => {
-            transitionToStep('step5');
-        }, totalPageTurnTime);
-    }
-    
-    // --- Particle Background Effect ---
-    function createParticles() {
-        const background = document.querySelector('.background-container');
-        const particleCount = 50;
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.style.position = 'absolute';
-            particle.style.width = `${Math.random() * 5 + 2}px`;
-            particle.style.height = particle.style.width;
-            particle.style.borderRadius = '50%';
-            particle.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-            particle.style.left = `${Math.random() * 100}vw`;
-            particle.style.top = `${Math.random() * 100}vh`;
-            particle.style.animation = `float ${Math.random() * 20 + 10}s linear infinite`;
-            background.appendChild(particle);
-        }
+            const next = document.getElementById(id);
+            if (next) next.classList.add('active');
+        }, 650);
     }
 
-    // Add keyframe animation for particles dynamically
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = `
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0.7; }
-            50% { transform: translateY(-20px) translateX(20px); opacity: 0.3; }
-            100% { transform: translateY(0) translateX(0); opacity: 0.7; }
-        }
-    `;
-    document.head.appendChild(styleSheet);
+    // ── Particles ─────────────────────────────────────────────
+    (function spawnParticles() {
+        const container = document.getElementById('particles');
+        const css = `
+            @keyframes p0 {
+                0%,100% { transform: translate(0,0) scale(1);    opacity: .55; }
+                50%      { transform: translate(14px,-50px) scale(1.25); opacity: .8;  }
+            }
+            @keyframes p1 {
+                0%,100% { transform: translate(0,0) scale(1);    opacity: .4; }
+                50%      { transform: translate(-20px,-38px) scale(.7); opacity: .25; }
+            }
+            @keyframes p2 {
+                0%,100% { transform: translate(0,0);   opacity: .6; }
+                33%      { transform: translate(22px,-28px); opacity: .85; }
+                66%      { transform: translate(-12px,-55px); opacity: .3; }
+            }
+        `;
+        const st = document.createElement('style');
+        st.textContent = css;
+        document.head.appendChild(st);
 
-    createParticles();
+        // Warm amber / ember palette — no red, matches parchment theme
+        const colors = [
+            [212, 175, 55],   // gold
+            [200, 145, 40],   // amber
+            [230, 190, 80],   // bright gold
+            [180, 110, 25],   // bronze
+        ];
+
+        for (let i = 0; i < 50; i++) {
+            const p   = document.createElement('div');
+            const sz  = Math.random() * 3 + 0.6;
+            const c   = colors[Math.floor(Math.random() * colors.length)];
+            const op  = Math.random() * 0.4 + 0.15;
+            const dur = 16 + Math.random() * 24;
+            const del = -(Math.random() * dur);
+            p.style.cssText = `
+                position:absolute;
+                width:${sz}px; height:${sz}px;
+                border-radius:50%;
+                background:rgba(${c[0]},${c[1]},${c[2]},${op});
+                box-shadow:0 0 ${sz * 3.5}px rgba(${c[0]},${c[1]},${c[2]},${op * 0.7});
+                left:${Math.random() * 100}vw;
+                top:${Math.random() * 100}vh;
+                animation:p${i % 3} ${dur}s ease-in-out ${del}s infinite;
+            `;
+            container.appendChild(p);
+        }
+    })();
+
+    // ── Cinematic sequence ────────────────────────────────────
+    // Scene 1: Intro (0ms) — 5.8s view
+    // Scene 2: Raven (5.8s + 650ms transition)
+    //   Raven animation: 3.8s, feather follows at 3s offset
+    //   Total raven scene: 5.5s
+    // Scene 3: Sealed letter (user arrives, auto-shown)
+    // Scene 4: Message (user clicks seal)
+
+    const T_INTRO  = 5800;
+    const T_RAVEN  = T_INTRO + 650 + 5500;   // 11950ms
+
+    // Intro → Raven
+    setTimeout(() => {
+        bgMusic.play().catch(() => {});
+        goTo('scene-raven');
+    }, T_INTRO);
+
+    // Raven → Sealed letter
+    setTimeout(() => {
+        goTo('scene-letter');
+    }, T_RAVEN);
+
+    // Sealed letter → Message (user clicks wax seal)
+    document.getElementById('sealBtn').addEventListener('click', () => {
+        goTo('scene-message');
+    });
 });
