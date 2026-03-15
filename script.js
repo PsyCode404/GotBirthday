@@ -1,7 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const bgMusic = document.getElementById('bgMusic');
+    const startOverlay = document.getElementById('startOverlay');
+    let experienceStarted = false;
+
+    // Click-to-start: unmute and begin
+    startOverlay.addEventListener('click', () => {
+        if (!experienceStarted) {
+            experienceStarted = true;
+            bgMusic.muted = false;
+            bgMusic.volume = 0.45;
+            bgMusic.play().catch(e => console.log('Audio play failed:', e));
+            startOverlay.classList.add('hidden');
+        }
+    });
+
+    // Fallback: try autoplay immediately
     bgMusic.volume = 0.45;
+    bgMusic.play().then(() => {
+        // Autoplay succeeded, hide overlay
+        startOverlay.classList.add('hidden');
+        experienceStarted = true;
+    }).catch(() => {
+        // Autoplay blocked, user must click
+        console.log('Autoplay blocked - waiting for user interaction');
+    });
 
     // ── Scene management ──────────────────────────────────────
     function goTo(id) {
@@ -80,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Intro → Raven
     setTimeout(() => {
-        bgMusic.play().catch(() => {});
         goTo('scene-raven');
     }, T_INTRO);
 

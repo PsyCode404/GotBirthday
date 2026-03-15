@@ -104,6 +104,56 @@ html, body {
 }
 
 /* =============================================
+   START OVERLAY (Click to begin)
+   ============================================= */
+.start-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(3,13,22,0.98);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.start-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.start-content {
+    text-align: center;
+    animation: startPulse 3s ease-in-out infinite;
+}
+.start-sigil {
+    font-size: 4rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 12px rgba(212,175,55,0.6));
+    animation: sigilRotate 8s linear infinite;
+}
+.start-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--parch);
+    margin: 0 0 0.8rem 0;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+.start-hint {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    opacity: 0.7;
+    font-style: italic;
+}
+@keyframes startPulse {
+    0%,100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.03); opacity: 0.9; }
+}
+@keyframes sigilRotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* =============================================
    FILM GRAIN OVERLAY
    ============================================= */
 .grain {
@@ -111,6 +161,12 @@ html, body {
     opacity: 0.045;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-size: 200px 200px;
+    animation: grainShift 1.2s steps(3) infinite;
+}
+@keyframes grainShift {
+    0%,100% { transform: translate(0,0); }
+    33%      { transform: translate(-5%,10%); }
+    66%      { transform: translate(-12%,5%); }
 }
 
 /* =============================================

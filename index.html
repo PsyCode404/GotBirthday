@@ -102,7 +102,16 @@
     <div class="grain"></div>
     <div class="vignette"></div>
     <div id="particles"></div>
-    <audio id="bgMusic" loop src="8d82b5_Game_of_Thrones_Theme_Song.mp3"></audio>
+    <audio id="bgMusic" loop autoplay muted src="8d82b5_Game_of_Thrones_Theme_Song.mp3"></audio>
+
+    <!-- Click-to-start overlay for autoplay restrictions -->
+    <div id="startOverlay" class="start-overlay">
+        <div class="start-content">
+            <div class="start-sigil">✦</div>
+            <p class="start-text">Click to begin your journey</p>
+            <div class="start-hint">A message from the North awaits...</div>
+        </div>
+    </div>
 
     <!-- Scene 1: Dark Intro -->
     <div class="scene active" id="scene-intro">
