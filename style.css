@@ -566,22 +566,22 @@ html, body {
 
 /* Iron Throne backdrop */
 .throne-backdrop {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 800px;
-    height: 55vh;
-    z-index: 5;
+    max-width: 700px;
+    height: 50vh;
+    z-index: 8;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 1.2s ease 0.3s;
+    transition: opacity 1s ease 0.2s;
 }
 
-.scene.active .throne-backdrop,
+#scene-message.active ~ .throne-backdrop,
 #scene-message.active .throne-backdrop {
-    opacity: 0.22;
+    opacity: 0.25;
 }
 
 .throne-img {
